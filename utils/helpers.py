@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from vacancies.vacancy import Vacancy
 
 def filter_vacancies(vacancies: List[Vacancy], filter_words: List[str]) -> List[Vacancy]:
@@ -10,9 +10,9 @@ def filter_vacancies(vacancies: List[Vacancy], filter_words: List[str]) -> List[
 
 def sort_vacancies(vacancies: List[Vacancy]) -> List[Vacancy]:
     """Сортировка вакансий по зарплате (по убыванию)."""
-    def get_salary_value(salary: str) -> int:
+    def get_salary_value(salary: Optional[str]) -> int:
         """Преобразует зарплату в число для корректной сортировки."""
-        if salary == "Зарплата не указана":
+        if salary is None or salary == "Зарплата не указана":
             return 0
         # Извлекаем первое число из строки (например, "100000-150000 руб." -> 100000)
         parts = salary.split("-")
